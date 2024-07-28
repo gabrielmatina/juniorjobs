@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Adicionar Vaga</title>
+</head>
+
+<body>
+  <h1>Adicionar Vaga</h1>
+  <form method="post">
+    <label for="job_title">Nome da Vaga:</label>
+    <input type="text" id="job_title" name="job_title">
+
+    <label for="salary_range">Faixa Salarial:</label>
+    <select id="salary_range" name="salary_range">
+      <option value="up_to_1000">Até 1.000</option>
+      <option value="1000_to_2000">De 1.000 a 2.000</option>
+      <option value="2000_to_3000">De 2.000 a 3.000</option>
+      <option value="above_3000">Acima de 3.000</option>
+    </select>
+
+    <label for="requirements">Requisitos:</label>
+    <textarea id="requirements" name="requirements"></textarea>
+
+    <label for="minimum_education">Escolaridade Mínima:</label>
+    <select id="minimum_education" name="minimum_education">
+      <option value="fundamental">Ensino fundamental</option>
+      <option value="medio">Ensino médio</option>
+      <option value="tecnologo">Tecnólogo</option>
+      <option value="superior">Ensino Superior</option>
+      <option value="pos_mba_mestrado">Pós / MBA / Mestrado</option>
+      <option value="doutorado">Doutorado</option>
+    </select>
+
+    <button type="submit">Adicionar Vaga</button>
+  </form>
+</body>
+
+</html>

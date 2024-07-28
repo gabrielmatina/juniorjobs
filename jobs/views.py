@@ -32,3 +32,18 @@ def candidate_register(request):
         form = CandidateForm()
     return render(request, 'jobs/candidate_register.html', {'form': form})
 
+def available_jobs(request):
+    return render(request, 'jobs/available_jobs.html')
+
+def applied_jobs(request):
+    return render(request, 'jobs/applied_jobs.html')
+
+def add_job_view(request):
+    return render(request, 'jobs/add_job.html')
+
+def view_jobs_view(request):
+    return render(request, 'jobs/view_jobs.html')
+
+def reports_view(request):
+    return render(request, 'jobs/reports.html')
+
