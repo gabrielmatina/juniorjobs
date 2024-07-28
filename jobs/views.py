@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
+from .forms import CandidateForm
+
 
 def home(request):
     return HttpResponse("Bem-vindo ao Junior Jobs!")
@@ -19,3 +21,14 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'jobs/login.html', {'form': form})
+
+def candidate_register(request):
+    if request.method == 'POST':
+        form = CandidateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CandidateForm()
+    return render(request, 'jobs/candidate_register.html', {'form': form})
+

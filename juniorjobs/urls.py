@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jobs.views import home, login_view  # Certifique-se de que está importando views corretamente
+from jobs.views import home, login_view, candidate_register  # Certifique-se de que está importando views corretamente
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # URL padrão para o painel de administração do Django
     path('', home, name='home'),       # URL para a página inicial
     path('login/', login_view, name='login'),  # URL para a página de login
+    path('register/', candidate_register, name='candidate_register'),  # URL para o registro de candidatos
 ]
 
