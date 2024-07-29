@@ -1,8 +1,16 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+
+class MyModel(models.Model):
+    created_at = models.DateTimeField(default=timezone.now)
 
 class CustomUser(AbstractUser):
-    is_company = models.BooleanField(default=False)
+    USER_TYPE_CHOICES = (
+        ('candidate', 'Candidate'),
+        ('company', 'Company'),
+    )
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
 
 class Job(models.Model):
     SALARY_CHOICES = [
@@ -26,40 +34,13 @@ class Job(models.Model):
     company = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='jobs')
 
 class Candidate(models.Model):
-    EDUCATION_CHOICES = [
-        ('Fundamental', 'Ensino fundamental'),
-        ('Medio', 'Ensino médio'),
-        ('Tecnologo', 'Tecnólogo'),
-        ('Superior', 'Ensino Superior'),
-        ('Pos', 'Pós'),
-        ('MBA', 'MBA'),
-        ('Mestrado', 'Mestrado'),
-        ('Doutorado', 'Doutorado'),
-    ]
-
-    STATUS_CHOICES = [
-        ('Estudando', 'Estudando'),
-        ('Concluido', 'Concluído'),
-        ('Trancado', 'Trancado'),
-        ('Interrompido', 'Interrompido'),
-    ]
-
-    STATES = [
-        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'),
-        ('BA', 'Bahia'), ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
-        ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'),
-        ('MG', 'Minas Gerais'), ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
-        ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'),
-        ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
-        ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
-    ]
-
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     full_name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2, choices=STATES)
-    education = models.CharField(max_length=20, choices=EDUCATION_CHOICES)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    state = models.CharField(max_length=2)
+    education = models.CharField(max_length=20)
+    status = models.CharField(max_length=20)
     salary_expectation = models.DecimalField(max_digits=10, decimal_places=2)
     additional_info = models.TextField()
 
@@ -67,9 +48,15 @@ class Candidate(models.Model):
         return self.full_name
 
 class Application(models.Model):
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    applied_at = models.DateTimeField(auto_now_add=True)
+    STATUS_CHOICES = [
+        ('applied', 'Applied'),
+        ('interviewed', 'Interviewed'),
+        ('hired', 'Hired'),
+        ('rejected', 'Rejected')
+    ]
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='applications')
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='applied')
 
     def __str__(self):
         return f"{self.candidate.full_name} applied for {self.job.name}"
