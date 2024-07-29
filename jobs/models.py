@@ -63,5 +63,13 @@ class Candidate(models.Model):
     salary_expectation = models.DecimalField(max_digits=10, decimal_places=2)
     additional_info = models.TextField()
 
-def __str__(self):
-    return self.full_name
+    def __str__(self):
+        return self.full_name
+
+class Application(models.Model):
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    applied_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.candidate.full_name} applied for {self.job.name}"

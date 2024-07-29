@@ -3,14 +3,21 @@
 
 <head>
   <title>Vagas Candidatadas</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div class="container mt-5">
-    <h2>Vagas Candidatadas</h2>
-    <p>Esta é a página onde os usuários podem verificar as vagas para as quais se candidataram.</p>
-  </div>
+  <h1>Vagas Candidatadas</h1>
+  <ul>
+    {% for application in applied_jobs %}
+    <li>
+      <h2>{{ application.job.title }}</h2>
+      <p>Faixa Salarial: {{ application.job.get_salary_range_display }}</p>
+      <p>Requisitos: {{ application.job.requirements }}</p>
+      <p>Escolaridade Mínima: {{ application.job.get_minimum_education_display }}</p>
+      <p>Data de Candidatura: {{ application.applied_at }}</p>
+    </li>
+    {% endfor %}
+  </ul>
 </body>
 
 </html>

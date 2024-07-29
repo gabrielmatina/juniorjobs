@@ -8,18 +8,22 @@
 <body>
   <h1>Visualizar Vagas</h1>
   <ul>
-    <!-- Exemplo de vaga -->
+    {% for job in jobs %}
     <li>
-      <h2>Nome da Vaga</h2>
-      <p>Faixa Salarial: Até 1.000</p>
-      <p>Requisitos: Detalhes dos requisitos</p>
-      <p>Escolaridade Mínima: Ensino médio</p>
+      <h2>{{ job.title }}</h2>
+      <p>Faixa Salarial: {{ job.get_salary_range_display }}</p>
+      <p>Requisitos: {{ job.requirements }}</p>
+      <p>Escolaridade Mínima: {{ job.get_minimum_education_display }}</p>
       <h3>Candidatos:</h3>
       <ul>
-        <!-- Exemplo de candidato -->
-        <li>Nome do Candidato</li>
+        {% for application in applications %}
+        {% if application.job == job %}
+        <li>{{ application.candidate.full_name }}</li>
+        {% endif %}
+        {% endfor %}
       </ul>
     </li>
+    {% endfor %}
   </ul>
 </body>
 
