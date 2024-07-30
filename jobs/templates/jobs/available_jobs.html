@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-  <title>Vagas Disponíveis</title>
-</head>
-
-<body>
-  <h1>Vagas Disponíveis</h1>
-  <ul>
+{% block content %}
+<div class="container mt-5">
+  <h2>Vagas Disponíveis</h2>
+  <ul class="list-group">
     {% for job in jobs %}
-    <li>
-      <h2>{{ job.title }}</h2>
-      <p>Faixa Salarial: {{ job.get_salary_range_display }}</p>
-      <p>Requisitos: {{ job.requirements }}</p>
-      <p>Escolaridade Mínima: {{ job.get_minimum_education_display }}</p>
+    <li class="list-group-item mb-3">
+      <h3>{{ job.title }}</h3>
+      <p><strong>Faixa Salarial:</strong> {{ job.get_salary_range_display }}</p>
+      <p><strong>Requisitos:</strong> {{ job.requirements }}</p>
+      <p><strong>Escolaridade Mínima:</strong> {{ job.get_minimum_education_display }}</p>
     </li>
     {% endfor %}
   </ul>
-</body>
-
-</html>
+</div>
+{% endblock %}

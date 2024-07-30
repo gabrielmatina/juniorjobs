@@ -3,6 +3,11 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
+  background-image: url("{% static 'images/fundo.jpeg' %}");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  filter: blur(1%);
 }
 
 .navbar {
@@ -16,9 +21,16 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  filter: none;
+  /* Remove o desfoque do conteúdo */
+  position: relative;
+  z-index: 1;
 }
 
-h1,
+h1 {
+  text-align: center;
+}
+
 h2 {
   color: #343a40;
 }
@@ -52,4 +64,20 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  border-top: 1px solid #dee2e6;
+}
+
+footer p {
+  margin: 0;
+  color: #6c757d;
 }

@@ -34,13 +34,40 @@ class Job(models.Model):
     company = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='jobs')
 
 class Candidate(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+    EDUCATION_CHOICES = [
+        ('Fundamental', 'Ensino fundamental'),
+        ('Medio', 'Ensino médio'),
+        ('Tecnologo', 'Tecnólogo'),
+        ('Superior', 'Ensino Superior'),
+        ('Pos', 'Pós'),
+        ('MBA', 'MBA'),
+        ('Mestrado', 'Mestrado'),
+        ('Doutorado', 'Doutorado'),
+    ]
+
+    STATUS_CHOICES = [
+        ('Estudando', 'Estudando'),
+        ('Concluido', 'Concluído'),
+        ('Trancado', 'Trancado'),
+        ('Interrompido', 'Interrompido'),
+    ]
+
+    STATES = [
+        ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'),
+        ('BA', 'Bahia'), ('CE', 'Ceará'), ('DF', 'Distrito Federal'), ('ES', 'Espírito Santo'),
+        ('GO', 'Goiás'), ('MA', 'Maranhão'), ('MT', 'Mato Grosso'), ('MS', 'Mato Grosso do Sul'),
+        ('MG', 'Minas Gerais'), ('PA', 'Pará'), ('PB', 'Paraíba'), ('PR', 'Paraná'),
+        ('PE', 'Pernambuco'), ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'),
+        ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'), ('SC', 'Santa Catarina'),
+        ('SP', 'São Paulo'), ('SE', 'Sergipe'), ('TO', 'Tocantins')
+    ]
+
     full_name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2)
-    education = models.CharField(max_length=20)
-    status = models.CharField(max_length=20)
+    state = models.CharField(max_length=2, choices=STATES)
+    education = models.CharField(max_length=20, choices=EDUCATION_CHOICES)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     salary_expectation = models.DecimalField(max_digits=10, decimal_places=2)
     additional_info = models.TextField()
 

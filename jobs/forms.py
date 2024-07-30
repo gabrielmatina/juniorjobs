@@ -9,6 +9,12 @@ class CandidateRegisterForm(forms.ModelForm):
             'full_name', 'address', 'city', 'state', 'education',
             'status', 'salary_expectation', 'additional_info'
         ]
+    
+    def __init__(self, *args, **kwargs):
+        super(CandidateRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['state'].empty_label = "Selecione seu estado"
+        self.fields['education'].empty_label = "Selecione seu nível de educação"
+        self.fields['status'].empty_label = "Selecione seu status"
 
 class JobForm(forms.ModelForm):
     class Meta:
@@ -24,6 +30,12 @@ class CandidateCreationForm(forms.ModelForm):
     class Meta:
         model = Candidate
         fields = ('full_name', 'address', 'city', 'state', 'education', 'status', 'salary_expectation', 'additional_info')
+
+    def __init__(self, *args, **kwargs):
+        super(CandidateCreationForm, self).__init__(*args, **kwargs)
+        self.fields['state'].empty_label = "Selecione seu estado"
+        self.fields['education'].empty_label = "Selecione seu nível de educação"
+        self.fields['status'].empty_label = "Selecione seu status"
 
 class JobCreationForm(forms.ModelForm):
     class Meta:

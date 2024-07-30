@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-  <title>Vagas Candidatadas</title>
-</head>
-
-<body>
-  <h1>Vagas Candidatadas</h1>
-  <ul>
+{% block content %}
+<div class="container mt-5">
+  <h2>Vagas Candidatadas</h2>
+  <ul class="list-group">
     {% for application in applied_jobs %}
-    <li>
-      <h2>{{ application.job.title }}</h2>
-      <p>Faixa Salarial: {{ application.job.get_salary_range_display }}</p>
-      <p>Requisitos: {{ application.job.requirements }}</p>
-      <p>Escolaridade Mínima: {{ application.job.get_minimum_education_display }}</p>
-      <p>Data de Candidatura: {{ application.applied_at }}</p>
+    <li class="list-group-item mb-3">
+      <h3>{{ application.job.title }}</h3>
+      <p><strong>Faixa Salarial:</strong> {{ application.job.get_salary_range_display }}</p>
+      <p><strong>Requisitos:</strong> {{ application.job.requirements }}</p>
+      <p><strong>Escolaridade Mínima:</strong> {{ application.job.get_minimum_education_display }}</p>
+      <p><strong>Data de Candidatura:</strong> {{ application.applied_at }}</p>
     </li>
     {% endfor %}
   </ul>
-</body>
-
-</html>
+</div>
+{% endblock %}
