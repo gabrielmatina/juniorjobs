@@ -3,7 +3,6 @@ from .models import CustomUser, Job, Candidate, Application
 from .forms import JobCreationForm, ApplicationForm, CustomUserCreationForm, CandidateCreationForm
 from django.contrib.auth.admin import UserAdmin
 
-
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserCreationForm
@@ -18,9 +17,8 @@ class CustomUserAdmin(UserAdmin):
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
-        if not change:  # New user
+        if not change:  # Novo usuário
             if obj.user_type == 'candidate':
-                # Create candidate profile for the new user
                 Candidate.objects.create(user=obj)
 
 admin.site.register(CustomUser, CustomUserAdmin)

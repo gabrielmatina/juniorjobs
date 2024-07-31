@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Junior Jobs</h1>
+<div class="jumbotron text-center">
+  <h1>Bem-vindo a Junior Jobs</h1>
+  <p>Cliente em Login para acessar a nossa plataforma. Ou se você é novo por aqui clique em cadastrar.</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+  <a class="btn btn-success btn-lg" href="{% url 'candidate_register' %}" role="button">Cadastrar</a>
+</div>
 {% endblock %}

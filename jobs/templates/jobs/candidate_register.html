@@ -6,36 +6,56 @@
   <form method="post">
     {% csrf_token %}
     <div class="form-group">
+      <label for="username">Nome de Usuário</label>
+      {{ user_form.username }}
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      {{ user_form.email }}
+    </div>
+    <div class="form-group">
+      <label for="password1">Senha</label>
+      {{ user_form.password1 }}
+    </div>
+    <div class="form-group">
+      <label for="password2">Confirme a Senha</label>
+      {{ user_form.password2 }}
+    </div>
+    <div class="form-group">
+      <label for="user_type">Tipo de Usuário</label>
+      {{ user_form.user_type }}
+    </div>
+    <div class="form-group">
       <label for="full_name">Nome Completo</label>
-      {{ form.full_name }}
+      {{ candidate_form.full_name }}
     </div>
     <div class="form-group">
       <label for="address">Endereço</label>
-      {{ form.address }}
+      {{ candidate_form.address }}
     </div>
     <div class="form-group">
       <label for="city">Cidade</label>
-      {{ form.city }}
+      {{ candidate_form.city }}
     </div>
     <div class="form-group">
       <label for="state">Estado</label>
-      {{ form.state }}
+      {{ candidate_form.state }}
     </div>
     <div class="form-group">
       <label for="education">Escolaridade</label>
-      {{ form.education }}
+      {{ candidate_form.education }}
     </div>
     <div class="form-group">
       <label for="status">Situação</label>
-      {{ form.status }}
+      {{ candidate_form.status }}
     </div>
     <div class="form-group">
       <label for="salary_expectation">Pretensão Salarial</label>
-      {{ form.salary_expectation }}
+      {{ candidate_form.salary_expectation }}
     </div>
     <div class="form-group">
       <label for="additional_info">Informações Adicionais</label>
-      {{ form.additional_info }}
+      {{ candidate_form.additional_info }}
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
   </form>

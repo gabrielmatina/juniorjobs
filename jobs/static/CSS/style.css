@@ -81,3 +81,9 @@ footer p {
   margin: 0;
   color: #6c757d;
 }
+
+.error_login {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
